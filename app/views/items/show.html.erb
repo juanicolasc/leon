@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Detalles</h1>
+    <div class="btn-group mr-2">
+      <%= link_to edit_item_path(@item) , class: 'btn btn-warning' do %>
+          <%= fa_icon('pencil-square-o', text: 'Editar')%> 
+        <% end %>
+      <%= link_to items_path, class: 'btn btn-danger' do %>
+          <%= fa_icon('list ', text: 'Volver')%> 
+        <% end %>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <%= image_tag(@item.image_url, width: 600, class: 'img-fluid') if @item.image.present? %>
+    </div>
+    <div class="col-md-8" >
+        <dl class="row">
+          <dt class="col-sm-3">Código:</dt>
+          <dd class="col-sm-9"><%= @item.code %></dd> 
+            
+          <dt class="col-sm-3">Marca:</dt>
+          <dd class="col-sm-9"><%= @item.brand %></dd>
+            
+          <dt class="col-sm-3">Nombre:</dt>
+          <dd class="col-sm-9"><%= @item.name %></dd>
+            
+          <dt class="col-sm-3">Proveedor:</dt>
+          <dd class="col-sm-9"><%= @item.supplier %></dd>
+            
+          <dt class="col-sm-3">Precio:</dt>
+          <dd class="col-sm-9"><%= number_to_currency(@item.price) %></dd>
+            
+          <dt class="col-sm-3">Cantidad:</dt>
+          <dd class="col-sm-9"><%= @item.stock %></dd>
+            
+          <dt class="col-sm-3">Descripción:</dt>
+          <dd class="col-sm-9"> <%= @item.description %></dd>
+            
+        </dl>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+<%= form_with(model: sale, local: true) do |form| %>
+  <% if sale.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sale.errors.count, "error") %> prohibited this sale from being saved:</h2>
+
+      <ul>
+      <% sale.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group row">
+    <%= form.label  "Fecha", :for => :date, class: 'col-sm-2 col-form-label text-sm-right' %>
+      <div class="col-sm-10"><%= form.date_select :date, id: :sale_date, class: 'form-control'  %></div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label "Nombre Del Cliente", :for => :customer_name, class: 'col-sm-2 col-form-label text-sm-right' %>
+      <div class="col-sm-10"><%= form.text_field :customer_name, id: :sale_customer_name, class: 'form-control'  %></div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label "Identificación", :for => :customer_identification, class: 'col-sm-2 col-form-label text-sm-right' %>
+      <div class="col-sm-10"><%= form.text_field :customer_identification, id: :sale_customer_id, class: 'form-control'  %></div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label "Teléfono", :for => :customer_phone, class: 'col-sm-2 col-form-label text-sm-right' %>
+      <div class="col-sm-10"><%= form.number_field :customer_phone, id: :sale_customer_phone, class: 'form-control'  %></div>
+  </div>
+
+
+  <div class="form-group row">
+    <%= form.label "Método de Pago", :for => :payment_method, class: 'col-sm-2 col-form-label text-sm-right' %>
+      <div class="col-sm-10">
+          <%= select(:sale, :payment_method, Sale::PAYMENT)  %>    
+          <%#= form.text_field :payment_method, id: :sale_payment_method, class: 'form-control'  %>
+      </div>
+  </div>
+
+  <div class="row" >
+      <div class="col-sm-2">
+      </div>
+      <div class="col-sm-10">
+          <div id='charges'>
+            <%= form.fields_for :charges do |charge| %>
+                <%= render 'charge_fields', :f => charge %>
+            <% end %>
+            <div class='links'>
+              <%= link_to_add_association 'Agregar item', form, :charges, :class => "btn btn-primary"  %>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div class="row" >
+      <div class="col-sm-2">
+      </div>
+      <div class="col-sm-10">
+          <div class="form-group row">
+            <%= form.label "Total", :for => :total_charge, class: 'col-sm-2 col-form-label text-sm-right'  %>
+              <div class="col-sm-4"><%= form.text_field :total_charge, id: :sale_total_charge,  readonly: '', class: 'form-control-plaintext'  %></div>
+            <%= form.label "Número de items", :for => :number_of_items, class: 'col-sm-2 col-form-label text-sm-right'  %>
+              <div class="col-sm-4"><%= form.text_field :number_of_items, id: :sale_number_of_items,  readonly: '', class: 'form-control-plaintext'   %></div>
+          </div>
+      </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label "Comentarios", :for => :comments, class: 'col-sm-2 col-form-label text-sm-right' %>
+      <div class="col-sm-10"><%= form.text_area :comments, id: :sale_comments, class: 'form-control'  %></div>
+  </div>
+
+  <div class="actions">
+    <%= button_tag(type: 'submit', class: "btn btn-success") do %>
+     <%= fa_icon('floppy-o', text: 'Guardar',  class: "icon-white")%>
+    <% end %>
+  </div>
+<% end %>

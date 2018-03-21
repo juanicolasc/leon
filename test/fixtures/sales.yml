@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2018-03-17
+  customer_name: MyString
+  customer_id: MyString
+  customer_phone: 1
+  total_charge: 1
+  number_of_items: 1
+  payment_method: MyString
+  comments: MyText
+  user_id: 1
+
+two:
+  date: 2018-03-17
+  customer_name: MyString
+  customer_id: MyString
+  customer_phone: 1
+  total_charge: 1
+  number_of_items: 1
+  payment_method: MyString
+  comments: MyText
+  user_id: 1

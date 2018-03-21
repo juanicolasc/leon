@@ -1,0 +1,5 @@
+    <div class='nested-fields'>
+        <%= f.collection_select :item_id, Item.available_stock, :id, :name, prompt: "Item..." %>
+        <%= f.number_field :price %>
+        <%= link_to_remove_association fa_icon('trash-o', text: 'Eliminar'), f, :class => "btn btn-danger  btn-sm" %>
+    </div>

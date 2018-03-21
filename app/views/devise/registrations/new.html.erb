@@ -1,0 +1,25 @@
+
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-signin" }) do |f| %>
+    <% unless devise_error_messages!.to_s.blank? %>
+    <div class="alert alert-danger">
+          <%= devise_error_messages! -%>
+    </div>
+    <% end %>
+  <h2>Registro</h2>
+    <%= f.label :email, :class => "sr-only"  %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :type => "email", :placeholder => "Correo Electrónico" %>
+
+    <%= f.label :password, :class => "sr-only"  %>
+    <%= f.password_field :password, autocomplete: "off", :class => "form-control", :type => "password", :placeholder => "Coontraseña #{ (@minimum_password_length.to_s + ' caracteres mínimo') if  @minimum_password_length } " %>
+
+    <%= f.label :password_confirmation, :class => "sr-only"  %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control", :type => "password", :placeholder => "Confirmar Coontraseña" %>
+
+  <div class="actions">
+    <%= f.submit "Sign up", :class => "btn btn-lg btn-primary btn-block"  %>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    <%= render "devise/shared/links" %>
+  </div>
+<% end %>
+
