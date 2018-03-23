@@ -36,7 +36,6 @@
     <%= form.label "Método de Pago", :for => :payment_method, class: 'col-sm-2 col-form-label text-sm-right' %>
       <div class="col-sm-10">
           <%= select(:sale, :payment_method, Sale::PAYMENT)  %>    
-          <%#= form.text_field :payment_method, id: :sale_payment_method, class: 'form-control'  %>
       </div>
   </div>
 

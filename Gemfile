@@ -26,8 +26,11 @@ gem 'jquery-rails'
 gem 'bootstrap', '~> 4.0.0'
 # font-awesome-rails provides the Font-Awesome web fonts and stylesheets as a Rails engine for use with the asset pipeline.
 gem 'font-awesome-rails'
-# Easily set up Rails controller actions for use with jQuery UI's Autocomplete widget.
+# Easily Autocomplete widget.
 gem "select2-rails"
+# Will Paginate in Rails 5
+gem 'will_paginate', '>= 3.1'
+
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

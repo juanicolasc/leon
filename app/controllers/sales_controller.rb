@@ -1,10 +1,17 @@
 class SalesController < ApplicationController
   before_action :set_sale, only: [:show, :edit, :update, :destroy]
+  append_before_action  only: [:edit, :update, :destroy]do 
+    unless current_user && current_user.admin?
+      flash[:alert] = 'No tiene permiso para esta acción'
+      redirect_to items_path 
+    end
+  end
 
   # GET /sales
   # GET /sales.json
   def index
-    @sales = Sale.all
+    @sales = Sale.search(params[:term], params[:page])
+    @sales_found =  Sale.count_search(params[:term])
   end
 
   # GET /sales/1

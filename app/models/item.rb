@@ -1,8 +1,36 @@
 class Item < ApplicationRecord
     has_many :charges, inverse_of: :item
     mount_uploader :image, ImageUploader
+    SIZE_OPTIONS=[  "N.A", "niño 4.5","niño 5.5","niño 6","niño 6.5","niño 7","niño 7.5","niño 8","niño 8.5","niño 9","niño 9.5",
+                    "niño 10","niño 10.5","niño 11","niño 11.5","niño 12","niño 12.5","niño 13","niño 13.5","1","1.5","2"," 2.5","3"," 3.5",
+                    "4","4.5","5","5.5","6","6.5","7","7.5","8","8.5","9","9.5","10","10.5","11","11.5","12","12.5"]
+    GENDER_OPTIONS = ["N.A", "Hombre","Mujer","Niño"]
+    
+    def code_name
+        self.code + ' - ' + self.brand + ' - ' + self.name
+    end
     
     def self.available_stock
         self.where("stock > 0").order(:name)
+    end
+    
+    def self.count_search(term)
+      if term
+        where('name LIKE ? or brand LIKE ? or code LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%").count
+      else
+        count
+      end
+    end
+    
+    def self.search(term, page, include_0)
+      if include_0.present? and term.present?
+            where('name LIKE ? or brand LIKE ? or code LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%").paginate(page: page, per_page: 20).order('id DESC')
+      elsif include_0.blank? and term.blank?
+            where('stock > 0').paginate(page: page, per_page: 20).order('id DESC')
+      elsif include_0.blank? and term.present?
+            where('(name LIKE ? or brand LIKE ? or code LIKE ?) and stock > 0', "%#{term}%", "%#{term}%", "%#{term}%").paginate(page: page, per_page: 20).order('id DESC')
+      else
+            paginate(page: page, per_page: 20).order('id DESC') 
+      end
     end
 end

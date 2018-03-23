@@ -11,7 +11,8 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    @items = Item.search(params[:term], params[:page], params[:include_0])
+    @items_found =  Item.count_search(params[:term])
   end
 
   # GET /items/1
@@ -76,7 +77,7 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:code, :brand, :name, :supplier, :description, :price, :cost, :stock, :image)
+      params.require(:item).permit(:code, :brand, :name, :supplier, :description, :price, :cost, :stock, :image, :size, :gender)
     end
     
     # verify is an admin

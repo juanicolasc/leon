@@ -1,11 +1,24 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
     <h1 class="h2">Ventas</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
+        <%= form_tag(sales_path, method: :get, :class => 'form-inline') do %>
+          <div class="input-group">
+             <%= text_field_tag :term, params[:term], :class => "form-control", :placeholder => "Cliente, identificación tel..." %>
+             <div class="input-group-append">
+                <%= button_tag(type: 'submit', class: "btn btn-info") do %>
+                    <%= fa_icon('search', text: 'Buscar',  class: "icon-white")%>
+                <% end %>
+             </div>
+          </div>
+        <% end %>
+        <div class="col-auto">
       <div class="btn-group mr-2">
+          
           <%= link_to new_sale_path, class: 'btn btn-success' do %>
               <%= fa_icon('star', text: 'Nueva Venta')%> 
             <% end %>
       </div>
+        </div>
     </div>
 </div>
 
@@ -39,4 +52,11 @@
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+      <tr class="thead-light">
+          <th class="text-center"colspan="10"> <span  > Total <%= @sales_found -%></span>
+            <%= will_paginate @sales,  {:renderer => PaginationListLinkRenderer,:previous_label => fa_icon('arrow-left'), :next_label => fa_icon('arrow-right'), :class => "pagination justify-content-center"} %>
+          </th>
+      </tr>
+  </tfoot>
 </table>
