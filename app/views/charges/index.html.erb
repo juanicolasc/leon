@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Items Vendidos</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <%= form_tag(charges_path, method: :get, :class => 'form-inline') do %>
+          <div class="input-group">
+              <label>Desde:</label>
+             <%= date_field_tag(:from, @from) -%>
+              <label>Hasta:</label>
+             <%= date_field_tag(:to, @to) -%>
+             <div class="input-group-append">
+                <%= button_tag(type: 'submit', class: "btn btn-info") do %>
+                    <%= fa_icon('search', text: 'Buscar',  class: "icon-white")%>
+                <% end %>
+             </div>
+          </div>
+        <% end %>
+        <div class="col-auto">
+            <div class="btn-group mr-2">
+            <%= link_to charges_path(format: "csv")+"?from="+@from+"&to="+@to, class: 'btn btn-success' do %>
+                <%= fa_icon('file-excel-o', text: 'Exportar')%> 
+            <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-responsive">
+<table class="table table-striped table-sm ">
+  <thead class="thead-dark">
+    <tr>
+      <th>Venta No.</th>
+      <th>Fecha</th>
+      <th>Item</th>
+      <th>Precio sugerido</th>
+      <th>Precio de venta</th>
+      <th>Costo</th>
+      <th>Utilidad</th>
+      <th>Venta</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @charges.each do |charge| %>
+      <tr>
+        <td><%= charge.id %></td>
+        <td><%= charge.date %></td>
+        <td><%= charge.name %></td>
+        <td class="text-right"><%= number_to_currency(charge.retail_price) %></td>
+        <td class="text-right"><%= number_to_currency(charge.sell_price) %></td>
+        <td class="text-right"><%= number_to_currency(charge.cost) %></td>
+        <td class="text-right"><%= number_to_currency(charge.profit) %></td>
+        <td><%= link_to fa_icon('search'), sale_path(charge.id), class: 'btn btn-primary btn-sm', :title => 'ver'  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+      <tr class="thead-light">
+          <th class="text-left" colspan="3"> <span> Registros: <%= @charges_found.first.total_quantity -%></span></th>
+          <th class="text-right"><span><%= number_to_currency(@charges_found.first.total_retail) -%></span></th>
+          <th class="text-right"><span><%= number_to_currency(@charges_found.first.total_sell) -%></span></th>
+          <th class="text-right"><span><%= number_to_currency(@charges_found.first.total_cost) -%></span></th>
+          <th class="text-right"><span><%= number_to_currency(@charges_found.first.total_profit) -%></span></th>
+          <th></th>
+      </tr>
+      <tr>
+          <th colspan=""><%= will_paginate @sales,  {:renderer => PaginationListLinkRenderer,:previous_label => fa_icon('arrow-left'), :next_label => fa_icon('arrow-right'), :class => "pagination justify-content-center"} %></th>
+      </tr>
+  </tfoot>
+</table>
+</div>

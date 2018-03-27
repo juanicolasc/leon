@@ -2,11 +2,11 @@
 
 León is an app developed to manage the inventory of a small store (stock management), so that you can know what products are in it, for this purpose it was not necessary a complex software with bar code management, or large quantities, as there is in majority of available applications. It only offers the possibility of adding a list of products and a list of sales, which will discount the inventory of each product as they are registered.
 
-![SampleScreenShot](https://raw.githubusercontent.com/juanicolasc/leon/blob/master/SampleScreenShot.png)
+![SampleScreenShot](SampleScreenShot.png)
 
 There's an sketch of Classes that I used
 
-![ClassDiagram](https://raw.githubusercontent.com/juanicolasc/leon/blob/master/ClassDiagram.png)
+![ClassDiagram](ClassDiagram.png)
 
 Here it will be available, for those who need a small software to manage a small store, they want to use it as a base for any larger project or as an educational tool. As I use it for my store you'll find some of the labels, messages and titles are in spanish, but I've been put an effort on coding in english.
 
@@ -81,7 +81,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## TO DO
 
-Ther's a lot of things to do here, for instance:
+There's a lot of things to do here, for instance:
 
 * create a variant model for increase precision on inventory.
 * add the remain configuration of devise to send emails.

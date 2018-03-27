@@ -18,10 +18,13 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item ">
-              <%= link_to fa_icon('list-ol', text: 'Inventario'), items_path, :class => 'nav-link'  %>
+              <%= link_to fa_stacked_icon('list-ol', base: "square-o", text: 'Inventario'), items_path, :class => 'nav-link'  %>
           </li>
           <li class="nav-item">
-              <%= link_to fa_icon('money', text: 'Ventas'), sales_path, :class => 'nav-link'  %>
+              <%= link_to fa_stacked_icon('', base: "money", text: 'Ventas'), sales_path, :class => 'nav-link'  %>
+          </li>
+          <li class="nav-item">
+              <%= link_to fa_stacked_icon("usd", base: "file-o", text: 'Reporte'), charges_path, :class => 'nav-link'  %>
           </li>
         </ul>
         <p class="navbar-text pull-right">
