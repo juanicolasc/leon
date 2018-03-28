@@ -9,7 +9,13 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# we need to get our database to work on Heroku, which uses a different database.
+group :development do
+  gem 'sqlite3'
+end
+group :production do
+  gem 'pg'
+end
 # We need to install a piece of software to let us upload files in Rails.
 gem 'carrierwave'
 # Use Puma as the app server
