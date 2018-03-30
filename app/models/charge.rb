@@ -9,7 +9,7 @@ class Charge < ApplicationRecord
     end
     
     def self.count_search(start_date, end_date)
-        select('sum(charges.price - items.cost) as total_profit, sum(items.cost) as total_cost, sum(items.price) as total_retail, sum(charges.price) as total_sell , count(charges.id) as total_quantity').joins(:sale, :item).where("sales.date" => start_date..end_date)
+        select('sum(charges.price - items.cost) as total_profit, sum(items.cost) as total_cost, sum(items.price) as total_retail, sum(charges.price) as total_sell , count(*) as total_quantity').joins(:sale, :item).where("sales.date" => start_date..end_date).order('date DESC') 
     end
     
     def self.to_csv(start_date, end_date, options = {})
