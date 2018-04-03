@@ -30,8 +30,12 @@
           <dt class="col-sm-3">Talla americana:</dt>
           <dd class="col-sm-9"><%= @item.size %></dd>
             
+            <% if current_user.admin  %>
           <dt class="col-sm-3">Proveedor:</dt>
           <dd class="col-sm-9"><%= @item.supplier %></dd>
+          <dt class="col-sm-3">Costo:</dt>
+          <dd class="col-sm-9"><%= number_to_currency(@item.cost) %></dd>
+            <% end %>
             
           <dt class="col-sm-3">Precio:</dt>
           <dd class="col-sm-9"><%= number_to_currency(@item.price) %></dd>
