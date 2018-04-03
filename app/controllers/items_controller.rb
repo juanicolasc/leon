@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items = Item.search(params[:term], params[:page], params[:include_0])
-    @items_found =  Item.count_search(params[:term])
+    @items_found =  Item.count_search(params[:term], params[:include_0])
   end
 
   # GET /items/1

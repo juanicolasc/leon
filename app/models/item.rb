@@ -14,11 +14,15 @@ class Item < ApplicationRecord
         self.where("stock > 0").order(:name)
     end
     
-    def self.count_search(term)
-      if term
-        where('name LIKE ? or brand LIKE ? or code LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%").count
+    def self.count_search(term, include_0)
+      if include_0.present? and term.present?
+            where('name LIKE ? or brand LIKE ? or code LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%").count
+      elsif include_0.blank? and term.blank?
+            where('stock > 0').count
+      elsif include_0.blank? and term.present?
+            where('(name LIKE ? or brand LIKE ? or code LIKE ?) and stock > 0', "%#{term}%", "%#{term}%", "%#{term}%").count
       else
-        count
+            count
       end
     end
     
