@@ -6,7 +6,6 @@ class Sale < ApplicationRecord
       validates :customer_name, :customer_identification, :customer_phone, :total_charge, :number_of_items, :payment_method, presence: true
       validates :number_of_items, :total_charge, numericality: true
     after_create :update_stock
-    after_update :update_stock
     
     def self.search(term, page)
       if term
