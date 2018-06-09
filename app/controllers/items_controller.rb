@@ -6,7 +6,14 @@ class ItemsController < ApplicationController
       redirect_to items_path 
     end
   end
-
+  append_before_action(:only => :index) do |controller|
+      if controller.request.format.csv?
+          unless current_user && current_user.admin?
+              flash[:alert] = 'No tiene permiso para esta acción'
+              redirect_to items_path 
+          end 
+      end
+  end
 
   # GET /items
   # GET /items.json
