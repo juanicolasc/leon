@@ -20,6 +20,9 @@
           <%= link_to new_item_path, class: 'btn btn-success' do %>
               <%= fa_icon('star', text: 'Nuevo Item')%> 
             <% end %>
+            <%= link_to items_path(format: "csv")+"?term="+params[:term].to_s+(!params['include_0'].nil? ? "&include_0=true": ""), class: 'btn btn-primary' do %>
+                <%= fa_icon('file-excel-o', text: 'Exportar')%> 
+            <% end %>
       </div>
         </div>
     </div>

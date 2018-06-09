@@ -13,6 +13,10 @@ class ItemsController < ApplicationController
   def index
     @items = Item.search(params[:term], params[:page], params[:include_0])
     @items_found =  Item.count_search(params[:term], params[:include_0])
+    respond_to do |format|
+      format.html
+      format.csv { send_data Item.to_csv(params[:term], params[:include_0], :col_sep => ";") }
+    end
   end
 
   # GET /items/1
