@@ -9,7 +9,7 @@ class Sale < ApplicationRecord
     
     def self.search(term, page)
       if term
-        where('customer_name LIKE ? or customer_identification LIKE ? or customer_phone LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%").paginate(page: page, per_page: 20).order('id DESC')
+        where('customer_name LIKE ? or customer_identification LIKE ? ', "%#{term}%", "%#{term}%").paginate(page: page, per_page: 20).order('id DESC')
       else
         paginate(page: page, per_page: 20).order('id DESC') 
       end
@@ -17,7 +17,7 @@ class Sale < ApplicationRecord
     
     def self.count_search(term)
       if term
-        where('customer_name LIKE ? or customer_identification LIKE ? or customer_phone LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%").count
+        where('customer_name LIKE ? or customer_identification LIKE ? ', "%#{term}%", "%#{term}%").count
       else
         count
       end
